@@ -7,9 +7,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
 
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -20,8 +17,13 @@
   </ion-header>
 
   <ion-list>
-    @for (message of getMessages(); track message) {
-      <app-message [message]="message"></app-message>
-    }
+    <ion-item *ngFor="let pokemon of data" (click)="openDetalhe(pokemon.id)">
+      <ion-label>
+        <h2>{{ pokemon.name }}</h2>
+        <!-- <p>{{ pokemon.id }}</p> -->
+      </ion-label>
+      <!-- <ion-note slot="end" color="primary">{{ message.date | date: 'short' }}</ion-note> -->
+    </ion-item>
   </ion-list>
+  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
 </ion-content>
